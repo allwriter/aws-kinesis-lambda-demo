@@ -11,6 +11,7 @@
 - 이벤트가 트리거 할 때만 실행되고 비용 발생
 - 인프라 관리없이 zip 파일 또는 컨테이너 이미지로 업로드
 - 다양한 AWS 서비스와 연동 용이 
+- 모니터링 용이
 </br>
 
 #### 사전 준비
@@ -75,12 +76,14 @@ AWS Lambda Function 생성 확인 (remote test 가능)
 - shard로 구성 Kafka의 partition과 유사
 - 다양한 AWS 서비스와 연동 가능 (data firehose, data analytics, lambda) 
 - 온디멘드 모드로 자동 프로비저닝 및 확장 
+- 모니터링 용이
 </br>
 
 ### Kinesis Data firehose
 - 스트리밍 데이터를 안정적으로 캡처하고 변환하여 데이터 레이크, 데이터 스토어, 분석 서비스에 전달하는 추출, 변환 로드 서비스
 - Lambda 연동하여 데이터 변환 가능
 - amazon s3, amazon redshift, amazon api gateway, splunk 등
+- 모니터링 용이
 </br>
 
 #### 1. AWS Kinesis 생성
