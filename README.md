@@ -170,13 +170,13 @@ Lambda input 설정 (kinesis firehose template)후 실행
 ![localtest3](./img/localtest3.png)
 </br>
 
-#### 5. AWS Lambda Function 생성 (리모트) 
-AWS Explorer > Lambda > create new AWS Lambda
+#### 6. AWS Lambda Function 생성 (리모트) 
+AWS Explorer > Lambda > create new AWS Lambda  
 ![create1](./img/create1.png)
 
-function, role, zip저장 s3 bucket 설정
+function, role, zip저장 s3 bucket 설정  
 ![create2](./img/create2.png)
 
-리모트 실행 가능
+AWS Lambda Function 생성 확인 및 리모트 테스트 가능  
 ![localtest3](./img/create3.png)
 </br>
