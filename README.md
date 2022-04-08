@@ -33,7 +33,11 @@ IntelliJ Marketplace > AWS Toolkit for IntelliJ 플러그인 설치
 </br>
 
 #### 3. Firehose Event Handler Example
-https://github.com/aws/aws-lambda-java-libs/tree/master/samples/kinesis-firehose-event-handler  
+Handler(Lambda Function Source) 참고: https://github.com/aws/aws-lambda-java-libs/tree/master/samples/kinesis-firehose-event-handler  
+Handler return 값 참고: https://docs.aws.amazon.com/ko_kr/firehose/latest/dev/data-transformation.html  
+- recordId: input으로 받은 ID와 동일한 ID로 리턴해야함  
+- result: Ok(레코드가 성공적으로 변환되었음), Dropped(처리 로직에 의해 의도적으로 레코드가 삭제됨), ProcessingFailed(레코드를 변환하지 못함)  
+- data: base64 인코딩 후 변환된 데이터 페이로드  
 </br>
 
 #### 4. 로컬 실행
