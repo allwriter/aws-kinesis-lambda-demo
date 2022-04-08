@@ -57,7 +57,7 @@ AWS Explorer > Lambda > create new AWS Lambda
 function, role, zip 저장용 s3 bucket 설정  
 ![create2](./img/create2.png)
 
-AWS Lambda Function 생성 확인 (remote test 가능)
+AWS Lambda Function 생성 확인 (remote test 가능)  
 ![localtest3](./img/create3.png)
 </br>
 
