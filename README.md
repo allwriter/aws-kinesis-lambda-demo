@@ -7,10 +7,16 @@
 
 ## Lambda 개발 환경 구성
 ### Lambda
-- 이벤트 중심 서버리스 컴퓨팅 서비스
-- 이벤트가 트리거 할 때만 실행되며, 실행될 때만 비용 지불
-- 인프라 관리없이 zip 파일 또는 컨테이너 이미지로 업로드 가능
-- Lambda Input, Output에 다양한 AWS 서비스 연동 가능  
+- 이벤트 중심 서버리스 컴퓨팅 서비스 (서버관리 필요없이 서비스 개발에 집중 가능)
+- 이벤트가 트리거 할 때만 실행되고 비용 발생
+- 인프라 관리없이 zip 파일 또는 컨테이너 이미지로 업로드
+- 다양한 AWS 서비스와 연동 용이 
+</br>
+
+#### 사전 준비
+- AWS 계정 및 권한
+- AWS CLI
+- Docker (Lambda Local 실행 시 필요)
 </br>
 
 #### 1. AWS SAM(Serverless Application Model) CLI 설치
@@ -19,19 +25,20 @@ brew tap aws/tap
 brew install aws-sam-cli
 ```
 https://docs.aws.amazon.com/ko_kr/serverless-application-model/latest/developerguide/what-is-sam.html
+
 </br>
 
 #### 2. AWS Toolkit for IntelliJ 설치
 IntelliJ Marketplace > AWS Toolkit for IntelliJ 플러그인 설치  
 </br>
 
-#### 3. 프로젝트 생성 
+#### 3. 프로젝트 생성 (IntelliJ)
 New Project > AWS > AWS Serverlless Application  
 왼쪽 하단 AWS Explorer 탭에서 자원 확인 가능  
 </br>
 
 #### 4. 프로젝트 수정
-템플릿 기본 애플리케이션은 Amazon API Gateway를 사용하는 Lambda 함수
+템플릿 기본 애플리케이션은 Amazon API Gateway를 사용하는 Lambda 함수  
 kinesis 이벤트를 받는 Lambda Function으로 수정  
 </br>
 
@@ -40,6 +47,8 @@ kinesis 이벤트를 받는 Lambda Function으로 수정
 
 App.java
 ```java
+package handler;
+
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.events.KinesisFirehoseEvent;
@@ -69,3 +78,86 @@ public class App
     }
 }
 ```
+</br>
+
+KinesisFirehoseResponse.java
+```java
+package handler;
+
+import java.util.ArrayList;
+import java.util.Base64;
+
+public class KinesisFirehoseResponse {
+    static public final String TRANSFORMED_STATE_OK = "Ok"; // Ok(레코드가 성공적으로 변환되었음)
+    static public final String TRANSFORMED_STATE_DROPPED = "Dropped"; // Dropped(처리 로직에 의해 의도적으로 레코드가 삭제됨)
+    static public final String TRANSFORMED_STATE_PROCESSINGFAILED = "ProcessingFailed"; // ProcessingFailed(레코드를 변환하지 못함)
+
+    ArrayList<FirehoseRecord> records = new ArrayList<FirehoseRecord>();
+
+    static class FirehoseRecord{
+        private String recordId;
+        private String result;
+        private String data;
+
+        public String getRecordId() {
+            return recordId;
+        }
+
+        public void setRecordId(String recordId) {
+            this.recordId = recordId;
+        }
+
+        public String getResult() {
+            return result;
+        }
+
+        public void setResult(String result) {
+            this.result = result;
+        }
+
+        public String getData() {
+            return data;
+        }
+
+        public void setData(String data) {
+            this.data = Base64.getEncoder().encodeToString(data.getBytes());
+        }
+    }
+}
+```
+</br>
+
+template.yaml
+```yaml
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  sam-app
+
+  Sample SAM Template for sam-app
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 20
+
+Resources:
+  MyLambdaFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: MyLambdaFunction
+      Handler: handler.App::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
+        Variables:
+          PARAM1: VALUE
+
+```
+</br>
+
+#### 5. Lambda 로컬 테스트
+클래스 옆 Lambda 아이콘에 마우스 왼쪽 버튼을 누르고 Run  
+![localtest1](./img/localtest1.png)
