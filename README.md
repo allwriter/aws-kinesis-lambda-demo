@@ -46,7 +46,7 @@ file 지정시 aws-lambda-java-libs/samples/kinesis-firehose-event-handler/src/t
 text 지정시 kinesis Firehose 선택  
 ![localtest2](./img/localtest2.png)
 
-로컬 실행 결과 확인
+로컬 실행 결과 확인  
 ![localtest3](./img/localtest3.png)
 </br>
 
@@ -58,9 +58,10 @@ function, role, zip 저장용 s3 bucket 설정
 ![create2](./img/create2.png)
 
 AWS Lambda Function 생성 확인 (remote test 가능)  
-![localtest3](./img/create3.png)
+![create3](./img/create3.png)
 </br>
-
+![create4](./img/create4.png)
+</br>
 
 ## Kinesis 환경 구성
 ### Kinesis
