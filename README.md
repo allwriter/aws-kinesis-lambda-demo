@@ -41,10 +41,11 @@ https://github.com/aws/aws-lambda-java-libs/tree/master/samples/kinesis-firehose
 클래스 옆 Lambda 아이콘에 마우스 왼쪽 버튼을 누르고 Run 클릭
 ![localtest1](./img/localtest1.png)
 
-Lambda input 설정  
+**Lambda input 설정**  
 file 지정시 aws-lambda-java-libs/samples/kinesis-firehose-event-handler/src/test/resources/event.json  
 text 지정시 kinesis Firehose 선택  
-![localtest2](./img/localtest2.png)
+![localtest2](./img/localtest2.png)  
+*records내 data는 Base64로 인코딩된 데이터임* 
 
 로컬 실행 결과 확인  
 ![localtest3](./img/localtest3.png)
@@ -64,9 +65,18 @@ AWS Lambda Function 생성 확인 (remote test 가능)
 </br>
 
 ## Kinesis 환경 구성
-### Kinesis
-- Data Streams
-- Data Firehose
+### Kinesis Data Streams
+- 서버리스 스트리밍 데이터 서비스 (서버관리 리소스가 적다)
+- Kafka broker와 역할과 구조가 유사
+- shard로 구성 Kafka의 partition과 유사
+- 다양한 AWS 서비스와 연동 가능 (data firehose, data analytics, lambda) 
+- 온디멘드 모드로 자동 프로비저닝 및 확장 
+</br>
+
+### Kinesis Data firehose
+- 스트리밍 데이터를 안정적으로 캡처하고 변환하여 데이터 레이크, 데이터 스토어, 분석 서비스에 전달하는 추출, 변환 로드 서비스
+- Lambda 연동하여 데이터 변환 가능
+- amazon s3, amazon redshift, amazon api gateway, splunk 등
 </br>
 
 #### 1. AWS Kinesis 생성
