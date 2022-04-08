@@ -158,6 +158,25 @@ Resources:
 ```
 </br>
 
-#### 5. Lambda 로컬 테스트
-클래스 옆 Lambda 아이콘에 마우스 왼쪽 버튼을 누르고 Run  
+#### 5. Lambda Function 로컬 테스트
+(docker 실행 필요)  
+클래스 옆 Lambda 아이콘에 마우스 왼쪽 버튼을 누르고 Run 클릭
 ![localtest1](./img/localtest1.png)
+
+Lambda input 설정 (kinesis firehose template)후 실행
+![localtest2](./img/localtest2.png)
+
+로컬 실행 결과 확인 "Hello, this is a test 123."
+![localtest3](./img/localtest3.png)
+</br>
+
+#### 5. AWS Lambda Function 생성 (리모트) 
+AWS Explorer > Lambda > create new AWS Lambda
+![create1](./img/create1.png)
+
+function, role, zip저장 s3 bucket 설정
+![create2](./img/create2.png)
+
+리모트 실행 가능
+![localtest3](./img/create3.png)
+</br>
