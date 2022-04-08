@@ -1,0 +1,13 @@
+Resources:
+  Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      Timeout: 300
+      MemorySize: 128
+      Handler: example.KinesisFirehoseEventHandler::handleRequest
+      CodeUri: s3://skccbucket/9e4b68cf47fddcf6b441b130d0e24d65
+      Runtime: java11
+      Architectures:
+      - x86_64
+    Metadata:
+      SamResourceId: Function
