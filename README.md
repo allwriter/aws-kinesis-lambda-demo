@@ -43,7 +43,6 @@ https://docs.aws.amazon.com/ko_kr/firehose/latest/dev/data-transformation.html
 file 지정시 aws-lambda-java-libs/samples/kinesis-firehose-event-handler/src/test/resources/event.json  
 text 지정시 kinesis Firehose 선택  
 ![localtest2](./img/localtest2.png)  
-*records내 data는 Base64로 인코딩된 데이터임* 
 
 로컬 실행 결과 확인  
 ![localtest3](./img/localtest3.png)
