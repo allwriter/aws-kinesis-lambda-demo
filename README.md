@@ -1,9 +1,4 @@
-# aws-kinesis-lambda-demo
-
-
-## Blueprint
-![architecture](./img/architecture.png)
-
+# aws-firehose-lambda-demo
 
 ## Lambda 개발 환경 구성
 ### Lambda
@@ -34,11 +29,9 @@ IntelliJ Marketplace > AWS Toolkit for IntelliJ 플러그인 설치
 </br>
 
 #### 3. Firehose Event Handler Example
-Handler(Lambda Function Source) 참고: https://github.com/aws/aws-lambda-java-libs/tree/master/samples/kinesis-firehose-event-handler  
-Handler return 값 참고: https://docs.aws.amazon.com/ko_kr/firehose/latest/dev/data-transformation.html  
-- recordId: input으로 받은 ID와 동일한 ID로 리턴해야함  
-- result: Ok(레코드가 성공적으로 변환되었음), Dropped(처리 로직에 의해 의도적으로 레코드가 삭제됨), ProcessingFailed(레코드를 변환하지 못함)  
-- data: base64 인코딩 후 변환된 데이터 페이로드  
+https://github.com/aws/aws-lambda-java-libs/tree/master/samples/kinesis-firehose-event-handler  
+https://docs.aws.amazon.com/ko_kr/firehose/latest/dev/data-transformation.html  
+
 </br>
 
 #### 4. 로컬 실행
@@ -68,22 +61,3 @@ AWS Lambda Function 생성 확인 (remote test 가능)
 </br>
 ![create4](./img/create4.png)
 </br>
-
-## Kinesis 환경 구성
-### Kinesis Data Streams
-- 서버리스 스트리밍 데이터 서비스 (서버관리 리소스가 적다)
-- Kafka broker와 역할과 구조가 유사
-- shard로 구성 Kafka의 partition과 유사
-- 다양한 AWS 서비스와 연동 가능 (data firehose, data analytics, lambda) 
-- 온디멘드 모드로 자동 프로비저닝 및 확장 
-- 모니터링 용이
-</br>
-
-### Kinesis Data firehose
-- 스트리밍 데이터를 안정적으로 캡처하고 변환하여 데이터 레이크, 데이터 스토어, 분석 서비스에 전달하는 추출, 변환 로드 서비스
-- Lambda 연동하여 데이터 변환 가능
-- amazon s3, amazon redshift, amazon api gateway, splunk 등
-- 모니터링 용이
-</br>
-
-#### 1. AWS Kinesis 생성
