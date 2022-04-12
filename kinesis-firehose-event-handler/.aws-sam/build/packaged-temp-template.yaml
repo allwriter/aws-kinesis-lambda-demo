@@ -5,7 +5,7 @@ Resources:
       Timeout: 300
       MemorySize: 128
       Handler: example.KinesisFirehoseEventHandler::handleRequest
-      CodeUri: s3://skccbucket/9e4b68cf47fddcf6b441b130d0e24d65
+      CodeUri: s3://skccbucket/79812d2399f349add7090651a6c8dadf
       Runtime: java11
       Architectures:
       - x86_64
