@@ -40,8 +40,7 @@ https://docs.aws.amazon.com/ko_kr/firehose/latest/dev/data-transformation.html
 ![localtest1](./img/localtest1.png)
 
 **Lambda input 설정**  
-file 지정시 aws-lambda-java-libs/samples/kinesis-firehose-event-handler/src/test/resources/event.json  
-text 지정시 kinesis Firehose 선택  
+kinesis Firehose template 선택  
 ![localtest2](./img/localtest2.png)  
 
 로컬 실행 결과 확인  
