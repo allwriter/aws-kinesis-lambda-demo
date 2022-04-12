@@ -60,3 +60,20 @@ AWS Lambda Function 생성 확인 (remote test 가능)
 </br>
 ![create4](./img/create4.png)
 </br>
+
+
+### S3 저장 디렉토리 동적 할당
+#### kinesis firehose 설정  
+![partition](./img/partition.png)
+</br>
+
+#### Lambda function 설정 
+Record에 metadata > partitionKeys 추가 
+```java
+        Map<String, Object> metadata = new HashMap<String, Object>();
+        Map<String, String> partition_keys = new HashMap<String, String>();
+        partition_keys.put("path1", "hello");
+        partition_keys.put("path2", "kinesis");
+        metadata.put("partitionKeys", partition_keys);
+
+```
