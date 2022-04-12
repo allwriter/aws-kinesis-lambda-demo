@@ -39,14 +39,14 @@ public class KinesisFirehoseEventHandler implements RequestHandler<KinesisFireho
             // Your business logic
             try{
                 reversedString = new StringBuilder(recordData).reverse().toString();
-            }catch (Exception e){
+                // Ok(레코드가 성공적으로 변환되었음)
+                records.add(new KinesisCustomResponse.Record(record.getRecordId(), Ok, ByteBuffer.wrap(reversedString.getBytes(UTF_8)), metadata));
                 logger.log("Your Log"); // CloudWatch에 로그 남기기
+            }catch (Exception e){
                 //ProcessingFailed(레코드를 변환하지 못함)
                 records.add(new KinesisCustomResponse.Record(record.getRecordId(), ProcessingFailed, record.getData(), metadata));
+                logger.log("Your Log"); // CloudWatch에 로그 남기기
             }
-            logger.log("Your Log"); // CloudWatch에 로그 남기기
-            // Ok(레코드가 성공적으로 변환되었음)
-            records.add(new KinesisCustomResponse.Record(record.getRecordId(), Ok, ByteBuffer.wrap(reversedString.getBytes(UTF_8)), metadata));
         }
         return new KinesisCustomResponse(records);
     }
